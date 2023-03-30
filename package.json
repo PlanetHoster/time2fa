@@ -1,8 +1,8 @@
 {
-  "name": "node-tfa",
+  "name": "node-otp",
   "version": "0.0.1",
-  "description": "NodeJS TFA implementation",
-  "repository": "git@github.com:PlanetHoster/node-tfa.git",
+  "description": "NodeJS OTP implementation",
+  "repository": "git@github.com:PlanetHoster/node-otp.git",
   "main": "./build/main.js",
   "typings": "./build/maid.d.ts",
   "scripts": {
