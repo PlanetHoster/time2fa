@@ -2,6 +2,12 @@ import crypto from "crypto";
 import { TotpConfig, TotpOptions } from "../interfaces/totp.interface";
 import { Encode32 } from "../utils/encode";
 import * as qrcode from "qrcode";
+import {
+  DEFAULT_TOTP_ALGO,
+  DEFAULT_TOTP_DIGITS,
+  DEFAULT_TOTP_PERIOD,
+  DEFAULT_TOTP_SECRET_SIZE,
+} from "../utils/constants";
 
 // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
 
@@ -72,10 +78,10 @@ export class GenerateKey {
 
   private generateConfig(config: TotpConfig | undefined): TotpConfig {
     return {
-      algo: config?.algo || "SHA1",
-      digits: config?.digits || 6,
-      period: config?.period || 30,
-      secretSize: config?.secretSize || 10,
+      algo: config?.algo || DEFAULT_TOTP_ALGO,
+      digits: config?.digits || DEFAULT_TOTP_DIGITS,
+      period: config?.period || DEFAULT_TOTP_PERIOD,
+      secretSize: config?.secretSize || DEFAULT_TOTP_SECRET_SIZE,
     };
   }
 }

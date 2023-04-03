@@ -1,1 +1,7 @@
 export const BASE32_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+
+// TOTP
+export const DEFAULT_TOTP_PERIOD = 30;
+export const DEFAULT_TOTP_DIGITS = 6;
+export const DEFAULT_TOTP_SECRET_SIZE = 10;
+export const DEFAULT_TOTP_ALGO = "sha1";
