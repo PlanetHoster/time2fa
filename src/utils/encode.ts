@@ -1,5 +1,4 @@
 import { BASE32_CHARS } from "./constants";
-import fs from "fs";
 
 export const Encode32 = (key: Buffer): string => {
   if (!Buffer.isBuffer(key)) {
@@ -28,12 +27,3 @@ export const Encode32 = (key: Buffer): string => {
   }
   return encodedKey;
 };
-
-// export const Encode64 = (content: Buffer): string => {
-//   if (!Buffer.isBuffer(content)) {
-//     throw new TypeError("The input must be a Buffer");
-//   }
-
-//   const data = fs.readFileSync(content);
-//   return Buffer.from(data).toString("base64");
-// };

@@ -1,10 +1,7 @@
 import crypto from "crypto";
-import {
-  TotpConfig,
-  TotpOptions,
-} from "../interfaces/totp.interface";
+import { TotpConfig, TotpOptions } from "../interfaces/totp.interface";
 import { Encode32 } from "../utils/encode";
-import * as qrcode from 'qrcode'
+import * as qrcode from "qrcode";
 
 // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
 
@@ -32,20 +29,20 @@ export class GenerateKey {
     this.url = this.generateUrl();
   }
 
-  qrCode(params?: {dataUrl: boolean}): Promise<string> {
+  qrCode(params?: { dataUrl: boolean }): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       qrcode.toDataURL(this.url, (err, url) => {
         if (err) {
-          reject(err)
+          reject(err);
         } else {
           let resp = url;
           if (!params || !params?.dataUrl) {
-            resp = resp.replace(/^data:image\/png;base64,/, '')
+            resp = resp.replace(/^data:image\/png;base64,/, "");
           }
-          resolve(resp)
+          resolve(resp);
         }
-      })
-    })
+      });
+    });
   }
 
   private generateUrl(): string {
