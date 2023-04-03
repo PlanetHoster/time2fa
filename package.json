@@ -6,7 +6,7 @@
   "main": "./build/main.js",
   "typings": "./build/maid.d.ts",
   "scripts": {
-    "build": "npm run clean && tsc",
+    "build": "npm i && npm run clean && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf ./.build",
     "lint": "eslint src",
@@ -15,12 +15,17 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/base-x": "^3.0.6",
     "@types/node": "^18.15.11",
+    "@types/qrcode": "^1.5.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "prettier": "^2.8.7",
     "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.1"
   }
 }
