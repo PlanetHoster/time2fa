@@ -3,7 +3,7 @@ import { Decode32 } from "../utils/encode";
 import * as crypto from "crypto";
 
 export class HmacBased {
-  public static generatePassCode(
+  public static generatePasscode(
     params: PasscodeOptions,
     config: ValidTotpConfig
   ): string {

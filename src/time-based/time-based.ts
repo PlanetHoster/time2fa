@@ -31,7 +31,7 @@ export class TimeBased {
       throw new ValidationError("Invalid passcode");
     }
 
-    const validationCode = HmacBased.generatePassCode(
+    const validationCode = HmacBased.generatePasscode(
       {
         secret: params.secret,
         counter,
