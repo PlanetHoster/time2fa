@@ -1,70 +1,64 @@
 import { BASE32_CHARS } from "./constants";
 
+// https://tools.ietf.org/html/rfc6238
+
 export const Encode32 = (key: Buffer): string => {
   if (!Buffer.isBuffer(key)) {
     throw new TypeError("The input must be a Buffer");
   }
 
-  let encodedKey = "";
-  let bitCount = 0;
-  let accumulator = 0;
+  let binary = "";
 
   for (let i = 0; i < key.length; i++) {
-    accumulator = (accumulator << 8) | key[i];
-    bitCount += 8;
-
-    while (bitCount >= 5) {
-      bitCount -= 5;
-      const index = (accumulator >> bitCount) & 31;
-      encodedKey += BASE32_CHARS.charAt(index);
-    }
+    binary += key[i].toString(2).padStart(8, "0");
   }
 
-  if (bitCount > 0) {
-    accumulator <<= 5 - bitCount;
-    const index = accumulator & 31;
-    encodedKey += BASE32_CHARS.charAt(index);
+  let base32 = "";
+  
+  for (let i = 0; i < binary.length; i += 5) {
+    const chunk = binary.substr(i, 5);
+    base32 += BASE32_CHARS[parseInt(chunk, 2)];
   }
-  return encodedKey;
+
+  const padding = base32.length % 8;
+
+  if (padding > 0) {
+    base32 += "=".repeat(8 - padding);
+  }
+
+  return base32;
 };
 
 export const Decode32 = (s: string): Buffer => {
-  const lookupTable = new Uint8Array(256);
-
-  for (let i = 0; i < BASE32_CHARS.length; i++) {
-    lookupTable[BASE32_CHARS.charCodeAt(i)] = i;
-  }
+  const len = s.length;
 
   let bits = 0;
-  let bitsCount = 0;
-  let result = Buffer.alloc(Math.ceil((s.length * 5) / 8));
+  let value = 0;
+  let offset = 0;
+  
+  const result = Buffer.alloc(Math.ceil((len * 5) / 8));
 
-  for (let i = 0; i < s.length; i++) {
-    const c = s.charCodeAt(i);
-    if (c === 61) {
-      while (bitsCount >= 8) {
-        bitsCount -= 8;
-        result.writeUInt8((bits >> bitsCount) & 255, (i * 5) >> 3);
-      }
-      break;
+  for (let i = 0; i < len; i++) {
+    const char = s.charAt(i);
+    const index = BASE32_CHARS.indexOf(char.toUpperCase());
+
+    // ignore padding characters
+    if (index === 32) {
+      continue;
     }
 
-    const value = lookupTable[c];
-
-    if (value === undefined) {
-      throw new Error("Invalid base32 string");
+    if (index === -1) {
+      throw new Error(`Invalid character found: ${char}`);
     }
 
-    bits = (bits << 5) | value;
-    bitsCount += 5;
-    if (bitsCount >= 8) {
-      bitsCount -= 8;
-      result.writeUInt8((bits >> bitsCount) & 255, (i * 5) >> 3);
+    value = (value << 5) | index;
+    bits += 5;
+
+    if (bits >= 8) {
+      result[offset++] = value >> (bits - 8);
+      bits -= 8;
     }
   }
 
-  return result.subarray(
-    0,
-    result.indexOf(0) !== -1 ? result.indexOf(0) : undefined
-  );
+  return result.slice(0, offset);
 };
