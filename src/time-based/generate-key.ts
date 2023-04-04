@@ -69,7 +69,7 @@ export class GenerateKey {
         params.set("algorithm", this.config.algo);
       }
 
-      // digits: this.config.digits.toString()
+      // Currently ignored by the google auth implementations
       if (this.config.digits !== DEFAULT_TOTP_DIGITS) {
         params.set("digits", this.config.digits.toString());
       }
