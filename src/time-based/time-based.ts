@@ -30,14 +30,9 @@ export class TimeBased {
       throw new ValidationError("Invalid passcode");
     }
 
-    const secret = params.secret.replace(/\s/g, "") || "";
-    if (secret.length !== validatedConfig.secretSize) {
-      throw new ValidationError("Invalid secret");
-    }
-
     const validationCode = HmacBased.generatePasscode(
       {
-        secret: secret,
+        secret: params.secret,
         counter,
       },
       validatedConfig
