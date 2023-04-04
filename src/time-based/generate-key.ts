@@ -1,24 +1,24 @@
 import crypto from "crypto";
-import { TotpConfig, TotpOptions } from "../interfaces/totp.interface";
+import {
+  TotpConfig,
+  TotpOptions,
+  ValidTotpConfig,
+} from "../interfaces/totp.interface";
 import { Encode32 } from "../utils/encode";
 import * as qrcode from "qrcode";
-import {
-  DEFAULT_TOTP_ALGO,
-  DEFAULT_TOTP_DIGITS,
-  DEFAULT_TOTP_PERIOD,
-  DEFAULT_TOTP_SECRET_SIZE,
-} from "../utils/constants";
+import { generateConfig } from "../main";
+import { DEFAULT_TOTP_ALGO, DEFAULT_TOTP_DIGITS } from "../utils/constants";
 
 // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
 
 export class GenerateKey {
-  private readonly issuer: string;
-  private readonly user: string;
-  private readonly config: TotpConfig;
-  private readonly secret: string;
-  private readonly url: string;
+  public readonly issuer: string;
+  public readonly user: string;
+  public readonly secret: string;
+  public readonly url: string;
+  public readonly config: ValidTotpConfig;
 
-  constructor(options: TotpOptions) {
+  constructor(options: TotpOptions, config?: TotpConfig) {
     if (!options?.issuer) {
       throw new Error("No issuer found");
     }
@@ -29,7 +29,7 @@ export class GenerateKey {
     this.issuer = options.issuer;
     this.user = options.user;
 
-    this.config = this.generateConfig(options?.config);
+    this.config = generateConfig(config);
 
     this.secret = this.generateSecret();
     this.url = this.generateUrl();
@@ -57,13 +57,24 @@ export class GenerateKey {
       url.pathname = `/${encodeURIComponent(this.issuer)}:${encodeURIComponent(
         this.user
       )}`;
-      url.search = new URLSearchParams({
+
+      const params = new URLSearchParams({
         issuer: this.issuer,
         period: this.config.period.toString(), // Currently ignored by the google auth implementations
-        algorithm: this.config.algo, // Currently ignored by the google auth implementations
-        digits: this.config.digits.toString(),
         secret: this.secret,
-      }).toString();
+      });
+
+      // Currently ignored by the google auth implementations
+      if (this.config.algo !== DEFAULT_TOTP_ALGO) {
+        params.set("algorithm", this.config.algo);
+      }
+
+      // digits: this.config.digits.toString()
+      if (this.config.digits !== DEFAULT_TOTP_DIGITS) {
+        params.set("digits", this.config.digits.toString());
+      }
+
+      url.search = params.toString();
 
       return url.toString();
     } else {
@@ -74,14 +85,5 @@ export class GenerateKey {
   private generateSecret(): string {
     const bytes = Buffer.from(crypto.randomBytes(this.config.secretSize));
     return Encode32(bytes);
-  }
-
-  private generateConfig(config: TotpConfig | undefined): TotpConfig {
-    return {
-      algo: config?.algo || DEFAULT_TOTP_ALGO,
-      digits: config?.digits || DEFAULT_TOTP_DIGITS,
-      period: config?.period || DEFAULT_TOTP_PERIOD,
-      secretSize: config?.secretSize || DEFAULT_TOTP_SECRET_SIZE,
-    };
   }
 }

@@ -14,9 +14,9 @@ export const Encode32 = (key: Buffer): string => {
   }
 
   let base32 = "";
-  
+
   for (let i = 0; i < binary.length; i += 5) {
-    const chunk = binary.substr(i, 5);
+    const chunk = binary.substring(i, i + 5);
     base32 += BASE32_CHARS[parseInt(chunk, 2)];
   }
 
@@ -35,14 +35,13 @@ export const Decode32 = (s: string): Buffer => {
   let bits = 0;
   let value = 0;
   let offset = 0;
-  
+
   const result = Buffer.alloc(Math.ceil((len * 5) / 8));
 
   for (let i = 0; i < len; i++) {
     const char = s.charAt(i);
     const index = BASE32_CHARS.indexOf(char.toUpperCase());
 
-    // ignore padding characters
     if (index === 32) {
       continue;
     }
@@ -60,5 +59,5 @@ export const Decode32 = (s: string): Buffer => {
     }
   }
 
-  return result.slice(0, offset);
+  return result.subarray(0, offset);
 };
