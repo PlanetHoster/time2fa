@@ -25,15 +25,19 @@ export class TimeBased {
     //   // TODO ADD MORE COUNTERS BASED ON DRIFT VALUE
     // }
 
-    const codeLength = validatedConfig.digits || DEFAULT_TOTP_DIGITS;
     const passcode = params?.passcode.replace(/\s/g, "") || "";
-    if (passcode.length !== codeLength) {
+    if (passcode.length !== validatedConfig.digits) {
       throw new ValidationError("Invalid passcode");
+    }
+
+    const secret = params.secret.replace(/\s/g, "") || "";
+    if (secret.length !== validatedConfig.secretSize) {
+      throw new ValidationError("Invalid secret");
     }
 
     const validationCode = HmacBased.generatePasscode(
       {
-        secret: params.secret,
+        secret: secret,
         counter,
       },
       validatedConfig
