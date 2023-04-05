@@ -1,8 +1,8 @@
 {
-  "name": "node-otp",
+  "name": "time2fa",
   "version": "0.0.1",
   "description": "NodeJS OTP implementation",
-  "repository": "git@github.com:PlanetHoster/node-otp.git",
+  "repository": "git@github.com:PlanetHoster/time2fa.git",
   "main": "./build/main.js",
   "typings": "./build/maid.d.ts",
   "scripts": {
