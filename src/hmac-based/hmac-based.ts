@@ -1,12 +1,16 @@
-import { PasscodeOptions, ValidTotpConfig } from "../interfaces/totp.interface";
+import {
+  HotpCode,
+  HotpValidateOptions,
+  TotpConfig,
+  ValidTotpConfig,
+} from "../interfaces/otp.interface";
+import { generateConfig } from "../main";
 import { Decode32 } from "../utils/encode";
 import * as crypto from "crypto";
+import { ValidationError } from "../utils/validation-error";
 
 export class HmacBased {
-  public static generatePasscode(
-    params: PasscodeOptions,
-    config: ValidTotpConfig
-  ): string {
+  public generatePasscode(params: HotpCode, config: ValidTotpConfig): string {
     const secretBytes = Buffer.from(Decode32(params.secret));
 
     const buf = Buffer.alloc(8);
@@ -26,5 +30,22 @@ export class HmacBased {
     const mod = value % Math.pow(10, config.digits);
 
     return mod.toString().padStart(config.digits, "0");
+  }
+
+  public verify(params: HotpValidateOptions, config?: TotpConfig) {
+    const validatedConfig = generateConfig(config);
+
+    const passcode = params?.passcode.replace(/\s/g, "") || "";
+    if (passcode.length !== validatedConfig.digits) {
+      throw new ValidationError("Invalid passcode");
+    }
+
+    const code = this.generatePasscode(params, validatedConfig);
+
+    if (code === passcode) {
+      return true;
+    }
+
+    return false;
   }
 }

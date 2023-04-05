@@ -27,14 +27,20 @@ export interface QrCodeOptions {
   height: string;
 }
 
-export interface ValidateOptions {
-  passcode: string;
+export interface TotpCode {
   secret: string;
   drift?: number;
-  config?: TotpConfig;
 }
 
-export interface PasscodeOptions {
+export interface TotpValidateOptions extends TotpCode {
+  passcode: string;
+}
+
+export interface HotpCode {
   secret: string;
   counter: number;
+}
+
+export interface HotpValidateOptions extends HotpCode {
+  passcode: string;
 }

@@ -1,12 +1,10 @@
-import crypto from "crypto";
 import {
   TotpConfig,
   TotpOptions,
   ValidTotpConfig,
-} from "../interfaces/totp.interface";
-import { Encode32 } from "../utils/encode";
+} from "../interfaces/otp.interface";
 import * as qrcode from "qrcode";
-import { generateConfig } from "../main";
+import { generateConfig, generateSecret } from "../main";
 import { DEFAULT_TOTP_ALGO, DEFAULT_TOTP_DIGITS } from "../utils/constants";
 
 // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
@@ -31,11 +29,11 @@ export class GenerateKey {
 
     this.config = generateConfig(config);
 
-    this.secret = this.generateSecret();
+    this.secret = generateSecret(this.config.secretSize);
     this.url = this.generateUrl();
   }
 
-  qrCode(params?: { dataUrl: boolean }): Promise<string> {
+  public qrCode(params?: { dataUrl: boolean }): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       qrcode.toDataURL(this.url, (err, url) => {
         if (err) {
@@ -80,10 +78,5 @@ export class GenerateKey {
     } else {
       throw new Error("Invalid configuration");
     }
-  }
-
-  private generateSecret(): string {
-    const bytes = Buffer.from(crypto.randomBytes(this.config.secretSize));
-    return Encode32(bytes);
   }
 }
