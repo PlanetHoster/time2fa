@@ -29,7 +29,7 @@ export const generateSecret = (
 export const generateBackupCodes = (
   numCodes = 10,
   codeLength = DEFAULT_TOTP_DIGITS
-) => {
+): string[] => {
   const backupCodes = [];
 
   for (let i = 0; i < numCodes; i++) {
