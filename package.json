@@ -1,6 +1,6 @@
 {
   "name": "time2fa",
-  "version": "1.0.0-beta",
+  "version": "1.0.1",
   "description": "NodeJS OTP implementation",
   "repository": {
     "type": "git",
