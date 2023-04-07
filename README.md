@@ -75,6 +75,17 @@ import { Totp } from 'time2fa';
 import * as qrcode from "qrcode";
 
 const key = Totp.generateKey({issuer: "N0C", user: "johndoe@n0c.com"});
+
+console.log(key);
+
+// GenerateKey {
+//   issuer: 'N0C',
+//   user: 'johndoe@n0c.com',
+//   config: { algo: 'sha1', digits: 6, period: 30, secretSize: 10 },
+//   secret: 'ABCDEFGHIJKLMN12',
+//   url: 'otpauth://totp/N0C:johndoe%40n0c.com?issuer=N0C&period=30&secret=ABCDEFGHIJKLMN12'
+// }
+
 qrcode.toDataURL(key.url, (err, url) => {
   console.log(url); // Returns a Data URI containing a representation of the QR Code image.
 });
