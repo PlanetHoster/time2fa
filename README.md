@@ -67,6 +67,19 @@ console.log(codes)
 // [ 123456 ]
 ```
 
+#### QRCode generation
+You must use an external library. For the example below we use [qrcode](https://github.com/soldair/node-qrcode).
+```javascript
+// Import Totp and qrcode
+import { Totp } from 'time2fa';
+import * as qrcode from "qrcode";
+
+const key = Totp.generateKey({issuer: "N0C", user: "johndoe@n0c.com"});
+qrcode.toDataURL(key.url, (err, url) => {
+  console.log(url); // Returns a Data URI containing a representation of the QR Code image.
+});
+```
+
 ### HOTP
 
 #### Generate Passcode
