@@ -1,8 +1,11 @@
 {
   "name": "time2fa",
-  "version": "0.0.1",
+  "version": "1.0.0-beta",
   "description": "NodeJS OTP implementation",
-  "repository": "git@github.com:PlanetHoster/time2fa.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/PlanetHoster/time2fa.git"
+  },
   "main": "./build/main.js",
   "typings": "./build/maid.d.ts",
   "scripts": {
@@ -10,9 +13,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf ./.build",
     "lint": "eslint src",
-    "format": "npx prettier --write src"
+    "format": "npx prettier --write src",
+    "build-package": "npm run build && cp ./package.json ./.build/ && cp ./README.md ./.build/README.md"
   },
-  "author": "",
+  "author": "Marc-Andre Godin",
   "license": "MIT",
   "devDependencies": {
     "@types/base-x": "^3.0.6",
@@ -25,7 +29,21 @@
     "prettier": "^2.8.7",
     "typescript": "^5.0.2"
   },
-  "dependencies": {
-    "qrcode": "^1.5.1"
-  }
+  "bugs": {
+    "url": "https://github.com/PlanetHoster/time2fa/issues"
+  },
+  "homepage": "https://github.com/PlanetHoster/time2fa#readme",
+  "keywords": [
+    "otp",
+    "totp",
+    "hotp",
+    "googleauth",
+    "googleauthenticator",
+    "authy",
+    "2fa",
+    "tfa",
+    "passcode",
+    "password",
+    "onetimepassword"
+  ]
 }

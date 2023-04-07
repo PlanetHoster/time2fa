@@ -32,7 +32,7 @@ export class HmacBased {
     return mod.toString().padStart(config.digits, "0");
   }
 
-  public verify(params: HotpValidateOptions, config?: TotpConfig) {
+  public validate(params: HotpValidateOptions, config?: TotpConfig) {
     const validatedConfig = generateConfig(config);
 
     const passcode = params?.passcode.replace(/\s/g, "") || "";

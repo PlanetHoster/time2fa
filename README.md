@@ -47,9 +47,9 @@ console.log(key);
 // Import Totp
 import { Totp } from 'time2fa';
 
-const valid = Totp.validate({passcode: '123456', secret: "ABCDEFGHIJKLMN12"});
+const valid = Totp.validate({passcode: '123456', secret: "ABCDEFGHIJKLMN12"})
 
-console.log(valid);
+console.log(valid)
 
 // true || false
 ```
@@ -68,4 +68,86 @@ console.log(codes)
 ```
 
 ### HOTP
+
+#### Generate Passcode
+```javascript
+// Import Hotp, and generateConfig for default configuration and generateSecret
+import { Hotp, generateConfig, generateSecret } from 'time2fa';
+
+const config = generateConfig();
+const secret = generateSecret();
+
+const code = Hotp.generatePasscode({secret, counter: 1}, config)
+
+console.log(code)
+
+// 123456
+```
+
+#### Validate passcode
+```javascript
+// Import Hotp
+import { Hotp } from 'time2fa';
+
+
+const valid = Hotp.validate({passcode: '123456', secret: 'ABCDEFGHIJKLMN12', counter: 1})
+
+console.log(valid)
+
+// true || false
+```
+
+### Helpers
+
+#### generateConfig()
+Generate default configuration
+```javascript
+// Import generateConfig
+import { generateConfig } from 'time2fa';
+
+const config = generateConfig();
+
+console.log(config);
+
+// { algo: 'sha1', digits: 6, period: 30, secretSize: 10 }
+```
+
+#### generateSecret()
+Only support base32 at the moment
+```javascript
+// Import generateSecret
+import { generateSecret } from 'time2fa';
+
+const secret = generateSecret();
+
+console.log(secret);
+
+// ABCDEFGHIJKLMN12
+```
+
+#### generateBackupCodes()
+Backup code should only be used once
+```javascript
+// Import generateBackupCodes
+import { generateBackupCodes } from 'time2fa';
+
+const backupCodes = generateBackupCodes();
+
+console.log(backupCodes);
+
+// [
+//   '810550', '236884',
+//   '979342', '815504',
+//   '835313', '529942',
+//   '263100', '882025',
+//   '204896', '516248'
+// ]
+```
+## Contributing
+All PR's are welcome!
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
 

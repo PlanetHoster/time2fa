@@ -3,7 +3,6 @@ import {
   TotpOptions,
   ValidTotpConfig,
 } from "../interfaces/otp.interface";
-import * as qrcode from "qrcode";
 import { generateConfig, generateSecret } from "../main";
 import { DEFAULT_TOTP_ALGO, DEFAULT_TOTP_DIGITS } from "../utils/constants";
 
@@ -31,22 +30,6 @@ export class GenerateKey {
 
     this.secret = generateSecret(this.config.secretSize);
     this.url = this.generateUrl();
-  }
-
-  public qrCode(params?: { dataUrl: boolean }): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-      qrcode.toDataURL(this.url, (err, url) => {
-        if (err) {
-          reject(err);
-        } else {
-          let resp = url;
-          if (!params || !params?.dataUrl) {
-            resp = resp.replace(/^data:image\/png;base64,/, "");
-          }
-          resolve(resp);
-        }
-      });
-    });
   }
 
   private generateUrl(): string {
