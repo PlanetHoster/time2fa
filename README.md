@@ -44,11 +44,11 @@ console.log(key);
 
 #### Validate passcode
 ```javascript
-// Import Totp, and generateConfig for default configuration
-import { Totp, generateConfig } from 'time2fa';
+// Import Totp
+import { Totp } from 'time2fa';
 
 const config = generateConfig();
-const valid = Totp.validate({passcode: '123456', secret: "ABCDEFGHIJKLMN12"}, config);
+const valid = Totp.validate({passcode: '123456', secret: "ABCDEFGHIJKLMN12"});
 
 console.log(valid);
 
@@ -57,10 +57,10 @@ console.log(valid);
 
 #### Generate passcodes
 ```javascript
-// Import Totp
-import { Totp } from 'time2fa';
+// Import Totp, and generateConfig for default configuration
+import { Totp, generateConfig } from 'time2fa';
 
-const codes = Totp.generatePasscodes({secret: "ABCDEFGHIJKLMN12"})
+const codes = Totp.generatePasscodes({secret: "ABCDEFGHIJKLMN12"}, config)
 
 console.log(codes)
 
