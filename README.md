@@ -44,12 +44,13 @@ console.log(key);
 
 #### Validate passcode
 ```javascript
-// Import Totp
-import { Totp } from 'time2fa';
+// Import Totp, and generateConfig for default configuration
+import { Totp, generateConfig } from 'time2fa';
 
-const valid = Totp.validate({passcode: '123456', secret: "ABCDEFGHIJKLMN12"})
+const config = generateConfig();
+const valid = Totp.validate({passcode: '123456', secret: "ABCDEFGHIJKLMN12"}, config);
 
-console.log(valid)
+console.log(valid);
 
 // true || false
 ```
