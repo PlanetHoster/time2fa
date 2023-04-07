@@ -47,7 +47,6 @@ console.log(key);
 // Import Totp
 import { Totp } from 'time2fa';
 
-const config = generateConfig();
 const valid = Totp.validate({passcode: '123456', secret: "ABCDEFGHIJKLMN12"});
 
 console.log(valid);
@@ -60,6 +59,7 @@ console.log(valid);
 // Import Totp, and generateConfig for default configuration
 import { Totp, generateConfig } from 'time2fa';
 
+const config = generateConfig();
 const codes = Totp.generatePasscodes({secret: "ABCDEFGHIJKLMN12"}, config)
 
 console.log(codes)
