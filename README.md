@@ -89,7 +89,6 @@ console.log(code)
 // Import Hotp
 import { Hotp } from 'time2fa';
 
-
 const valid = Hotp.validate({passcode: '123456', secret: 'ABCDEFGHIJKLMN12', counter: 1})
 
 console.log(valid)
