@@ -12,11 +12,11 @@ import { INVALID_SECRET_ERR } from "../utils/constants";
 
 export class HmacBased {
   public generatePasscode(params: HotpCode, config: ValidTotpConfig): string {
-    if (!params.secret || params.secret.length !== config.secretSize) {
+    const secretBytes = Buffer.from(Decode32(params.secret));
+
+    if (secretBytes.length !== config.secretSize) {
       throw new ValidationError(INVALID_SECRET_ERR);
     }
-
-    const secretBytes = Buffer.from(Decode32(params.secret));
 
     const buf = Buffer.alloc(8);
     buf.writeUInt32BE(params.counter, 4);
