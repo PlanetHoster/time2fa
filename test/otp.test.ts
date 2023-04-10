@@ -8,11 +8,11 @@ describe("TOTP Generate Key", () => {
   const defaultConfig = generateConfig();
 
   test("issuer is present", () => {
-    expect(() => Totp.generateKey({ issuer: "", user })).toThrowError();
+    expect(() => Totp.generateKey({ issuer: "", user })).toThrow('No issuer found');
   });
 
   test("user is present", () => {
-    expect(() => Totp.generateKey({ issuer, user: "" })).toThrowError();
+    expect(() => Totp.generateKey({ issuer, user: "" })).toThrow('No user found');
   });
 
   const key = Totp.generateKey({ issuer, user });
@@ -85,10 +85,20 @@ describe("TOTP passcodes default config", () => {
     ).toBe(false);
   });
 
+  test("invalid secret length", () => {
+    const secret = generateSecret(32);
+    expect(() => Totp.validate({ passcode: codes[1], secret })).toThrow('Invalid secret');
+  });
+
+  test("valid secret length but wrong secret", () => {
+    const secret = generateSecret(10);
+    expect(Totp.validate({ passcode: codes[1], secret })).toBe(false);
+  });
+
   test("invalid passcode length", () => {
     expect(() =>
       Totp.validate({ passcode: "123", secret: key.secret })
-    ).toThrowError();
+    ).toThrow('Invalid passcode');
   });
 });
 
