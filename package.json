@@ -10,7 +10,7 @@
   "typings": "./build/maid.d.ts",
   "scripts": {
     "build": "npm i && npm run clean && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "clean": "rimraf ./.build",
     "lint": "eslint src",
     "format": "npx prettier --write src",
@@ -20,6 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/base-x": "^3.0.6",
+    "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
     "@types/qrcode": "^1.5.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
@@ -27,6 +28,7 @@
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "prettier": "^2.8.7",
+    "ts-jest": "^29.1.0",
     "typescript": "^5.0.2"
   },
   "bugs": {
