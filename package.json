@@ -10,7 +10,7 @@
   "typings": "./build/maid.d.ts",
   "scripts": {
     "build": "npm i && npm run clean && tsc",
-    "test": "jest",
+    "test": "npm run build && jest",
     "clean": "rimraf ./.build",
     "lint": "eslint src",
     "format": "npx prettier --write src",

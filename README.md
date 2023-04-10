@@ -166,6 +166,12 @@ console.log(backupCodes);
 //   '204896', '516248'
 // ]
 ```
+## Running Tests
+To run tests, run the following command
+```bash
+  npm run test
+```
+
 ## Contributing
 All PR's are welcome!
 
