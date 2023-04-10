@@ -1,4 +1,5 @@
-import { BASE32_CHARS } from "./constants";
+import { BASE32_CHARS, INVALID_SECRET_ERR } from "./constants";
+import { ValidationError } from "./validation-error";
 
 // https://tools.ietf.org/html/rfc6238
 
@@ -47,7 +48,7 @@ export const Decode32 = (s: string): Buffer => {
     }
 
     if (index === -1) {
-      throw new Error(`Invalid character found: ${char}`);
+      throw new ValidationError(INVALID_SECRET_ERR);
     }
 
     value = (value << 5) | index;
