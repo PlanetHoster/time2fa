@@ -6,8 +6,8 @@
     "type": "git",
     "url": "git+ssh://git@github.com/PlanetHoster/time2fa.git"
   },
-  "main": "./build/main.js",
-  "typings": "./build/maid.d.ts",
+  "main": "./main.js",
+  "typings": "./maid.d.ts",
   "scripts": {
     "build": "npm i && npm run clean && tsc",
     "test": "npm run build && jest",
