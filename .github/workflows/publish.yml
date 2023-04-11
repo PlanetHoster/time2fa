@@ -26,7 +26,7 @@ jobs:
       run: npm run build-package
 
     - name: Publish to NPM
-      working-directoty: './.build/'
+      working-directory: './.build/'
       run: npm publish --access public
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
