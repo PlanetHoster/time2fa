@@ -1,4 +1,4 @@
-![build & test](https://github.com/PlanetHoster/time2fa/actions/workflows/build.yml/badge.svg?branch=main)
+[![Build & test](https://github.com/PlanetHoster/time2fa/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/PlanetHoster/time2fa/actions/workflows/build.yml)
 
 
 # Time2fa
