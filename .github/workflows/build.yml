@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Build & Test (15.x -> 19.x)
 
 on:
   push:

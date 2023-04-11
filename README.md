@@ -1,3 +1,5 @@
+![build & test](https://github.com/PlanetHoster/time2fa/actions/workflows/build.yml/badge.svg?branch=main)
+
 
 # Time2fa
 
