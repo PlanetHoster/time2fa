@@ -1,4 +1,4 @@
-name: Test for 15.x -> 19.x
+name: Build & test
 
 on:
   push:
