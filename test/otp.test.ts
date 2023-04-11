@@ -1,5 +1,11 @@
 import { describe, expect, test } from "@jest/globals";
-import { Totp, generateConfig, generateSecret } from "../.build/main";
+import {
+  Totp,
+  generateConfig,
+  generateSecret,
+  generateBackupCodes,
+  Hotp,
+} from "../.build/main";
 
 const issuer = "n0c";
 const user = "johndoe@n0c.com";
@@ -130,5 +136,38 @@ describe("TOTP passcodes hashing algorithms", () => {
     expect(
       Totp.validate({ passcode: code, secret: key.secret }, { algo: "sha512" })
     ).toBe(false);
+  });
+});
+
+describe("Helpers", () => {
+  test("backup codes default count", () => {
+    const backupCodes = generateBackupCodes();
+    expect(backupCodes.length).toBe(10);
+  });
+
+  test("backup code default length", () => {
+    const backupCodes = generateBackupCodes();
+    expect(backupCodes[0].length).toBe(6);
+  });
+});
+
+describe("HOTP", () => {
+  const config = generateConfig();
+  const secret = generateSecret();
+
+  const code = Hotp.generatePasscode({ secret, counter: 1 }, config);
+
+  test("passcode validation valid counter", () => {
+    expect(Hotp.validate({ passcode: code, secret, counter: 1 })).toBe(true);
+  });
+
+  test("passcode validation invalid counter", () => {
+    expect(Hotp.validate({ passcode: code, secret, counter: 2 })).toBe(false);
+  });
+
+  test("invalid passcode", () => {
+    expect(() =>
+      Hotp.validate({ passcode: "123", secret, counter: 2 })
+    ).toThrow("Invalid passcode");
   });
 });
