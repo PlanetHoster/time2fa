@@ -11,15 +11,15 @@ import { ValidationError } from "../utils/validation-error";
 import { INVALID_SECRET_ERR } from "../utils/constants";
 
 export class HmacBased {
-  public generatePasscode(params: HotpCode, config: ValidTotpConfig): string {
-    const secretBytes = Buffer.from(Decode32(params.secret));
+  public generatePasscode(options: HotpCode, config: ValidTotpConfig): string {
+    const secretBytes = Buffer.from(Decode32(options.secret));
 
     if (secretBytes.length !== config.secretSize) {
       throw new ValidationError(INVALID_SECRET_ERR);
     }
 
     const buf = Buffer.alloc(8);
-    buf.writeUInt32BE(params.counter, 4);
+    buf.writeUInt32BE(options.counter, 4);
     const hmac = crypto.createHmac(config.algo, secretBytes);
     hmac.update(buf);
     const hmacResult = hmac.digest();
@@ -37,15 +37,15 @@ export class HmacBased {
     return mod.toString().padStart(config.digits, "0");
   }
 
-  public validate(params: HotpValidateOptions, config?: TotpConfig) {
+  public validate(options: HotpValidateOptions, config?: TotpConfig) {
     const validatedConfig = generateConfig(config);
 
-    const passcode = params?.passcode.replace(/\s/g, "") || "";
+    const passcode = options?.passcode.replace(/\s/g, "") || "";
     if (passcode.length !== validatedConfig.digits) {
       throw new ValidationError("Invalid passcode");
     }
 
-    const code = this.generatePasscode(params, validatedConfig);
+    const code = this.generatePasscode(options, validatedConfig);
 
     if (code === passcode) {
       return true;
