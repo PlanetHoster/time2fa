@@ -169,7 +169,9 @@ console.log(backupCodes);
 
 ## Documentation
 
-### Helpers
+### Functions
+
+#### Helpers
 
 generateConfig(config?: [TotpConfig](#TotpConfig)): `ValidTotpConfig`
 
@@ -177,7 +179,7 @@ generateSecret(secretSize: number = DEFAULT_TOTP_SECRET_SIZE): `string`
 
 generateBackupCodes(numCodes = 10, codeLength = DEFAULT_TOTP_DIGITS): `string[]`
 
-### Totp
+#### Totp
 
 Totp.generateKey(options: [TotpOptions](#TotpOptions), config?: [TotpConfig](#TotpConfig)): `GenerateKey`
 
@@ -185,14 +187,11 @@ Totp.generatePasscodes(options: [TotpCode](#TotpCode), config: [ValidTotpConfig]
 
 Totp.validate(options: [TotpValidateOptions](#TotpValidateOptions), config?: [TotpConfig](#TotpConfig)): `boolean`
 
-### Hotp
+#### Hotp
 
 Hotp.generatePasscode(options: [HotpCode](#HotpCode), config: [ValidTotpConfig](#ValidTotpConfig)): `string`
 
 Hotp.validate(options: [HotpValidateOptions](#HotpValidateOptions), config?: [TotpConfig](#TotpConfig)): `boolean`
-
-
-## API Reference
 
 ### Interfaces / Parameters
 
