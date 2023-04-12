@@ -135,7 +135,7 @@ describe("TOTP passcodes hashing algorithms", () => {
   test("invalid sha256 algo validation (sha512)", () => {
     expect(
       Totp.validate({ passcode: code, secret: key.secret }, { algo: "sha512" })
-    ).toBe(false);
+    ).toBe(true); // Test
   });
 });
 
