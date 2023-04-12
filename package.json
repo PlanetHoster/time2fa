@@ -22,7 +22,6 @@
     "@types/base-x": "^3.0.6",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
-    "@types/qrcode": "^1.5.0",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
     "eslint": "^8.37.0",
