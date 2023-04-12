@@ -167,6 +167,90 @@ console.log(backupCodes);
 // ]
 ```
 
+## Documentation
+
+### Helpers
+
+generateConfig(config?: [TotpConfig](#TotpConfig)): `ValidTotpConfig`
+
+generateSecret(secretSize: number = DEFAULT_TOTP_SECRET_SIZE): `string`
+
+generateBackupCodes(numCodes = 10, codeLength = DEFAULT_TOTP_DIGITS): `string[]`
+
+### Totp
+
+Totp.generateKey(options: TotpOptions, config?: TotpConfig): `GenerateKey`
+
+Totp.generatePasscodes(options: TotpCode, config: ValidTotpConfig): `string[]`
+
+Totp.validate(options: TotpValidateOptions, config?: TotpConfig): `boolean`
+
+### Hotp
+
+Hotp.generatePasscode(options: HotpCode, config: ValidTotpConfig): `string`
+
+Hotp.validate(options: HotpValidateOptions, config?: TotpConfig): `boolean`
+
+
+## API Reference
+
+### Interfaces / Parameters
+
+#### `TotpConfig`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `secretSize` | `number` |10|**Optional** - Secret size|
+| `period` | `number` |30|**Optional** - Period of time|
+| `digits` | `number` |6|**Optional**- Code length|
+| `algo` | `Algorithms` |sha1|**Optional** - 'sha1' \| 'sha256' \| 'sha512'|
+
+#### `ValidTotpConfig`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `secretSize` | `number` |-|**Required** - Secret size|
+| `period` | `number` |-|**Required** - Period of time|
+| `digits` | `number` |-|**Required**- Code length|
+| `algo` | `Algorithms` |-|**Required** - 'sha1' \| 'sha256' \| 'sha512'|
+
+#### `TotpOptions`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `issuer` | `string` |-|**Required** - Issuer name|
+| `user` | `string` |-|**Required** - Username|
+
+#### `TotpCode`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `secret` | `string` |-|**Required** - Secret|
+| `drift` | `number` |0|**Optional** - Time tolerance|
+
+#### `TotpValidateOptions`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `passcode` | `string` |-|**Required** - The passcode to validate|
+| `secret` | `string` |-|**Required** - Secret|
+| `drift` | `number` |0|**Optional** - Time tolerance|
+
+#### `HotpCode`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `secret` | `string` |-|**Required** - Secret|
+| `counter` | `number` |-|**Required** - Custom counter value|
+
+#### `HotpValidateOptions`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `passcode` | `string` |-|**Required** - The passcode to validate|
+| `secret` | `string` |-|**Required** - Secret|
+| `counter` | `number` |-|**Required** - Custom counter value|
+
 ## Contributing
 All PR's are welcome!
 

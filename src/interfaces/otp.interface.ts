@@ -18,15 +18,6 @@ export interface TotpOptions {
   user: string;
 }
 
-export interface Secret {
-  base32: string;
-}
-
-export interface QrCodeOptions {
-  width: string;
-  height: string;
-}
-
 export interface TotpCode {
   secret: string;
   drift?: number;
