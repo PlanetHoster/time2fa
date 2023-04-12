@@ -179,17 +179,17 @@ generateBackupCodes(numCodes = 10, codeLength = DEFAULT_TOTP_DIGITS): `string[]`
 
 ### Totp
 
-Totp.generateKey(options: TotpOptions, config?: TotpConfig): `GenerateKey`
+Totp.generateKey(options: [TotpOptions](#TotpOptions), config?: [TotpConfig](#TotpConfig)): `GenerateKey`
 
-Totp.generatePasscodes(options: TotpCode, config: ValidTotpConfig): `string[]`
+Totp.generatePasscodes(options: [TotpCode](#TotpCode), config: [ValidTotpConfig](#ValidTotpConfig)): `string[]`
 
-Totp.validate(options: TotpValidateOptions, config?: TotpConfig): `boolean`
+Totp.validate(options: [TotpValidateOptions](#TotpValidateOptions), config?: [TotpConfig](#TotpConfig)): `boolean`
 
 ### Hotp
 
-Hotp.generatePasscode(options: HotpCode, config: ValidTotpConfig): `string`
+Hotp.generatePasscode(options: [HotpCode](#HotpCode), config: [ValidTotpConfig](#ValidTotpConfig)): `string`
 
-Hotp.validate(options: HotpValidateOptions, config?: TotpConfig): `boolean`
+Hotp.validate(options: [HotpValidateOptions](#HotpValidateOptions), config?: [TotpConfig](#TotpConfig)): `boolean`
 
 
 ## API Reference
