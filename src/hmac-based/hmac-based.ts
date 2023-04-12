@@ -37,7 +37,7 @@ export class HmacBased {
     return mod.toString().padStart(config.digits, "0");
   }
 
-  public validate(options: HotpValidateOptions, config?: TotpConfig) {
+  public validate(options: HotpValidateOptions, config?: TotpConfig): boolean {
     const validatedConfig = generateConfig(config);
 
     const passcode = options?.passcode.replace(/\s/g, "") || "";
