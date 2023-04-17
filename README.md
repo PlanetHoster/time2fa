@@ -1,5 +1,6 @@
 [![Build & test](https://github.com/PlanetHoster/time2fa/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/PlanetHoster/time2fa/actions/workflows/build.yml) [![npm](https://img.shields.io/npm/v/time2fa?label=time2fa%40npm)](https://www.npmjs.com/package/time2fa)
-# Time2fa
+
+![Time2fa](https://i.imgur.com/iPyeSH4.png)
 
 A comprehensive Node.js package that simplifies the implementation of One-Time Password (OTP) authentication using HMAC-based One-Time Password (HOTP) and Time-based One-Time Password (TOTP) algorithms.
 
