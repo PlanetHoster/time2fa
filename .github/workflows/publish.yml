@@ -23,7 +23,7 @@ jobs:
       run: npm run test
 
     - name: Prepare package
-      run: npm run build-package
+      run: npm run build
 
     - name: Publish to NPM
       working-directory: './.build/'
