@@ -149,6 +149,18 @@ console.log(secret);
 // ABCDEFGHIJKLMN12
 ```
 
+#### generateUrl()
+```javascript
+// Import generateSecret
+import { generateUrl } from 'time2fa';
+
+const url = generateUrl();
+
+console.log(url);
+
+// otpauth://totp/N0C:johndoe%40n0c.com?issuer=N0C&period=30&secret=ABCDEFGHIJKLMN12
+```
+
 #### generateBackupCodes()
 Backup code should only be used once
 ```javascript
