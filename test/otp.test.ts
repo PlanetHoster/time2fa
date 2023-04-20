@@ -5,7 +5,7 @@ import {
   generateSecret,
   generateBackupCodes,
   Hotp,
-} from "../dist/index";
+} from "../src";
 
 const issuer = "n0c";
 const user = "johndoe@n0c.com";
