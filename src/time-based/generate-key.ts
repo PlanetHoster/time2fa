@@ -3,7 +3,7 @@ import {
   TotpOptions,
   ValidTotpConfig,
 } from "../interfaces/otp.interface";
-import { generateConfig, generateSecret, generateUrl } from "../main";
+import { generateConfig, generateSecret, generateUrl } from "../index";
 
 // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
 

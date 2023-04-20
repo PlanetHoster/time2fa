@@ -1,11 +1,11 @@
-import { describe, expect, test } from "@jest/globals";
+import { describe, expect, test } from "vitest";
 import {
   Totp,
   generateConfig,
   generateSecret,
   generateBackupCodes,
   Hotp,
-} from "../.build/main";
+} from "../dist/index";
 
 const issuer = "n0c";
 const user = "johndoe@n0c.com";

@@ -4,9 +4,9 @@ import {
   TotpConfig,
   ValidTotpConfig,
 } from "../interfaces/otp.interface";
-import { generateConfig } from "../main";
+import { generateConfig } from "../index";
 import { Decode32 } from "../utils/encode";
-import * as crypto from "crypto";
+import crypto from "crypto";
 import { ValidationError } from "../utils/validation-error";
 import { INVALID_SECRET_ERR } from "../utils/constants";
 

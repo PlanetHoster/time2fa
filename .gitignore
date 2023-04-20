@@ -1,4 +1,13 @@
-node_modules/
-.build/
+.cache
+.DS_Store
+.idea
+*.log
+*.tgz
+.build
 .todo*
 coverage
+dist
+lib-cov
+logs
+node_modules
+temp

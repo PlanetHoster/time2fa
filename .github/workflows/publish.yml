@@ -1,32 +1,39 @@
-name: Publishing npm package
+name: Release
+
+permissions:
+  contents: write
 
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
 
 jobs:
-  build_and_deploy:
+  release:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '19.x'
-        registry-url: 'https://registry.npmjs.org'
+      - name: Set node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: npm
 
-    - name: Run tests
-      run: npm run test
+      - name: Run tests
+        run: npm run test
 
-    - name: Prepare package
-      run: npm run build
+      - name: Prepare package
+        run: npm run build
 
-    - name: Publish to NPM
-      working-directory: './.build/'
-      run: npm publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to NPM
+        working-directory: "./dist/"
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: npx changelogithub
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
