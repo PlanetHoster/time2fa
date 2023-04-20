@@ -1,9 +1,8 @@
 [![Build & test](https://github.com/PlanetHoster/time2fa/actions/workflows/build.yml/badge.svg?branch=main&event=push)](https://github.com/PlanetHoster/time2fa/actions/workflows/build.yml) [![npm](https://img.shields.io/npm/v/time2fa?label=time2fa%40npm)](https://www.npmjs.com/package/time2fa)
 
-![Time2fa](https://i.imgur.com/iPyeSH4.png)
+![Time2fa](https://github.com/PlanetHoster/time2fa/blob/main/doc/logo.png?raw=true)
 
 A comprehensive Node.js package that simplifies the implementation of One-Time Password (OTP) authentication using HMAC-based One-Time Password (HOTP) and Time-based One-Time Password (TOTP) algorithms.
-
 
 ## Features
 
@@ -13,7 +12,6 @@ A comprehensive Node.js package that simplifies the implementation of One-Time P
 - Supports various hashing algorithms (SHA-1, SHA-256, SHA-512)
 - Compatible with popular OTP generators like Google Authenticator and Authy
 
-
 ## Installation
 
 Install the package using NPM:
@@ -21,16 +19,18 @@ Install the package using NPM:
 ```bash
 npm i --save time2fa
 ```
+
 ## Usage/Examples
 
 ### TOTP
 
 #### Generate key
+
 ```javascript
 // Import Totp
-import { Totp } from 'time2fa';
+import { Totp } from "time2fa";
 
-const key = Totp.generateKey({issuer: "N0C", user: "johndoe@n0c.com"});
+const key = Totp.generateKey({ issuer: "N0C", user: "johndoe@n0c.com" });
 
 console.log(key);
 
@@ -44,38 +44,42 @@ console.log(key);
 ```
 
 #### Validate passcode
+
 ```javascript
 // Import Totp
-import { Totp } from 'time2fa';
+import { Totp } from "time2fa";
 
-const valid = Totp.validate({passcode: '123456', secret: "ABCDEFGHIJKLMN12"})
+const valid = Totp.validate({ passcode: "123456", secret: "ABCDEFGHIJKLMN12" });
 
-console.log(valid)
+console.log(valid);
 
 // true || false
 ```
 
 #### Generate passcodes
+
 ```javascript
 // Import Totp, and generateConfig for default configuration
-import { Totp, generateConfig } from 'time2fa';
+import { Totp, generateConfig } from "time2fa";
 
 const config = generateConfig();
-const codes = Totp.generatePasscodes({secret: "ABCDEFGHIJKLMN12"}, config)
+const codes = Totp.generatePasscodes({ secret: "ABCDEFGHIJKLMN12" }, config);
 
-console.log(codes)
+console.log(codes);
 
 // [ 123456 ]
 ```
 
 #### QRCode generation
+
 You must use an external library. For the example below we use [qrcode](https://github.com/soldair/node-qrcode).
+
 ```javascript
 // Import Totp and qrcode
-import { Totp } from 'time2fa';
+import { Totp } from "time2fa";
 import * as qrcode from "qrcode";
 
-const key = Totp.generateKey({issuer: "N0C", user: "johndoe@n0c.com"});
+const key = Totp.generateKey({ issuer: "N0C", user: "johndoe@n0c.com" });
 
 console.log(key);
 
@@ -95,28 +99,34 @@ qrcode.toDataURL(key.url, (err, url) => {
 ### HOTP
 
 #### Generate Passcode
+
 ```javascript
 // Import Hotp, and generateConfig for default configuration and generateSecret
-import { Hotp, generateConfig, generateSecret } from 'time2fa';
+import { Hotp, generateConfig, generateSecret } from "time2fa";
 
 const config = generateConfig();
 const secret = generateSecret();
 
-const code = Hotp.generatePasscode({secret, counter: 1}, config)
+const code = Hotp.generatePasscode({ secret, counter: 1 }, config);
 
-console.log(code)
+console.log(code);
 
 // 123456
 ```
 
 #### Validate passcode
+
 ```javascript
 // Import Hotp
-import { Hotp } from 'time2fa';
+import { Hotp } from "time2fa";
 
-const valid = Hotp.validate({passcode: '123456', secret: 'ABCDEFGHIJKLMN12', counter: 1})
+const valid = Hotp.validate({
+  passcode: "123456",
+  secret: "ABCDEFGHIJKLMN12",
+  counter: 1,
+});
 
-console.log(valid)
+console.log(valid);
 
 // true || false
 ```
@@ -124,10 +134,12 @@ console.log(valid)
 ### Helpers
 
 #### generateConfig()
+
 Generate default configuration
+
 ```javascript
 // Import generateConfig
-import { generateConfig } from 'time2fa';
+import { generateConfig } from "time2fa";
 
 const config = generateConfig();
 
@@ -137,10 +149,12 @@ console.log(config);
 ```
 
 #### generateSecret()
+
 Only support base32 at the moment
+
 ```javascript
 // Import generateSecret
-import { generateSecret } from 'time2fa';
+import { generateSecret } from "time2fa";
 
 const secret = generateSecret();
 
@@ -150,11 +164,16 @@ console.log(secret);
 ```
 
 #### generateUrl()
+
 ```javascript
 // Import generateSecret
-import { generateUrl } from 'time2fa';
+import { generateUrl } from "time2fa";
 
-const url = generateUrl({issuer: "N0C", user: "johndoe@n0c.com", secret: "ABCDEFGHIJKLMN12"});
+const url = generateUrl({
+  issuer: "N0C",
+  user: "johndoe@n0c.com",
+  secret: "ABCDEFGHIJKLMN12",
+});
 
 console.log(url);
 
@@ -162,10 +181,12 @@ console.log(url);
 ```
 
 #### generateBackupCodes()
+
 Backup code should only be used once
+
 ```javascript
 // Import generateBackupCodes
-import { generateBackupCodes } from 'time2fa';
+import { generateBackupCodes } from "time2fa";
 
 const backupCodes = generateBackupCodes();
 
@@ -212,72 +233,75 @@ Hotp.validate(options: [HotpValidateOptions](#HotpValidateOptions), config?: [To
 
 #### `TotpConfig`
 
-| Parameter | Type     | default                |Description|
-| :-------- | :------- | :------------------------- |--------|
-| `secretSize` | `number` |10|**Optional** - Secret size|
-| `period` | `number` |30|**Optional** - Period of time|
-| `digits` | `number` |6|**Optional**- Code length|
-| `algo` | `Algorithms` |sha1|**Optional** - 'sha1' \| 'sha256' \| 'sha512'|
+| Parameter    | Type         | default | Description                                   |
+| :----------- | :----------- | :------ | --------------------------------------------- |
+| `secretSize` | `number`     | 10      | **Optional** - Secret size                    |
+| `period`     | `number`     | 30      | **Optional** - Period of time                 |
+| `digits`     | `number`     | 6       | **Optional**- Code length                     |
+| `algo`       | `Algorithms` | sha1    | **Optional** - 'sha1' \| 'sha256' \| 'sha512' |
 
 #### `ValidTotpConfig`
 
-| Parameter | Type     | default                |Description|
-| :-------- | :------- | :------------------------- |--------|
-| `secretSize` | `number` |-|**Required** - Secret size|
-| `period` | `number` |-|**Required** - Period of time|
-| `digits` | `number` |-|**Required**- Code length|
-| `algo` | `Algorithms` |-|**Required** - 'sha1' \| 'sha256' \| 'sha512'|
+| Parameter    | Type         | default | Description                                   |
+| :----------- | :----------- | :------ | --------------------------------------------- |
+| `secretSize` | `number`     | -       | **Required** - Secret size                    |
+| `period`     | `number`     | -       | **Required** - Period of time                 |
+| `digits`     | `number`     | -       | **Required**- Code length                     |
+| `algo`       | `Algorithms` | -       | **Required** - 'sha1' \| 'sha256' \| 'sha512' |
 
 #### `TotpOptions`
 
-| Parameter | Type     | default                |Description|
-| :-------- | :------- | :------------------------- |--------|
-| `issuer` | `string` |-|**Required** - Issuer name|
-| `user` | `string` |-|**Required** - Username|
+| Parameter | Type     | default | Description                |
+| :-------- | :------- | :------ | -------------------------- |
+| `issuer`  | `string` | -       | **Required** - Issuer name |
+| `user`    | `string` | -       | **Required** - Username    |
 
 #### `UrlOptions`
 
-| Parameter | Type     | default                |Description|
-| :-------- | :------- | :------------------------- |--------|
-| `issuer` | `string` |-|**Required** - Issuer name|
-| `user` | `string` |-|**Required** - Username|
-| `secret` | `string` |-|**Required** - Secret|
+| Parameter | Type     | default | Description                |
+| :-------- | :------- | :------ | -------------------------- |
+| `issuer`  | `string` | -       | **Required** - Issuer name |
+| `user`    | `string` | -       | **Required** - Username    |
+| `secret`  | `string` | -       | **Required** - Secret      |
 
 #### `TotpCode`
 
-| Parameter | Type     | default                |Description|
-| :-------- | :------- | :------------------------- |--------|
-| `secret` | `string` |-|**Required** - Secret|
-| `drift` | `number` |0|**Optional** - Time tolerance|
+| Parameter | Type     | default | Description                   |
+| :-------- | :------- | :------ | ----------------------------- |
+| `secret`  | `string` | -       | **Required** - Secret         |
+| `drift`   | `number` | 0       | **Optional** - Time tolerance |
 
 #### `TotpValidateOptions`
 
-| Parameter | Type     | default                |Description|
-| :-------- | :------- | :------------------------- |--------|
-| `passcode` | `string` |-|**Required** - The passcode to validate|
-| `secret` | `string` |-|**Required** - Secret|
-| `drift` | `number` |0|**Optional** - Time tolerance|
+| Parameter  | Type     | default | Description                             |
+| :--------- | :------- | :------ | --------------------------------------- |
+| `passcode` | `string` | -       | **Required** - The passcode to validate |
+| `secret`   | `string` | -       | **Required** - Secret                   |
+| `drift`    | `number` | 0       | **Optional** - Time tolerance           |
 
 #### `HotpCode`
 
-| Parameter | Type     | default                |Description|
-| :-------- | :------- | :------------------------- |--------|
-| `secret` | `string` |-|**Required** - Secret|
-| `counter` | `number` |-|**Required** - Custom counter value|
+| Parameter | Type     | default | Description                         |
+| :-------- | :------- | :------ | ----------------------------------- |
+| `secret`  | `string` | -       | **Required** - Secret               |
+| `counter` | `number` | -       | **Required** - Custom counter value |
 
 #### `HotpValidateOptions`
 
-| Parameter | Type     | default                |Description|
-| :-------- | :------- | :------------------------- |--------|
-| `passcode` | `string` |-|**Required** - The passcode to validate|
-| `secret` | `string` |-|**Required** - Secret|
-| `counter` | `number` |-|**Required** - Custom counter value|
+| Parameter  | Type     | default | Description                             |
+| :--------- | :------- | :------ | --------------------------------------- |
+| `passcode` | `string` | -       | **Required** - The passcode to validate |
+| `secret`   | `string` | -       | **Required** - Secret                   |
+| `counter`  | `number` | -       | **Required** - Custom counter value     |
 
 ## Contributing
+
 All PR's are welcome!
 
 ## Running Tests
+
 To run tests, run the following command
+
 ```bash
 npm run test
 ```
@@ -285,4 +309,3 @@ npm run test
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
