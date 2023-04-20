@@ -22,6 +22,12 @@ jobs:
           node-version: 18.x
           cache: npm
 
+      - name: Setup
+        run: npm i -g @antfu/ni
+
+      - name: Install
+        run: nci
+
       - name: Run tests
         run: npm run test
 
