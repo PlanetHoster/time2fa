@@ -45,7 +45,6 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.4",
     "@antfu/ni": "^0.21.2",
     "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
