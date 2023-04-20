@@ -1,9 +1,9 @@
 {
   "name": "time2fa",
   "type": "module",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "NodeJS OTP implementation",
-  "author": "Marc-Andre Godin",
+  "author": "@MarcAndreG",
   "license": "MIT",
   "homepage": "https://github.com/PlanetHoster/time2fa#readme",
   "repository": {
