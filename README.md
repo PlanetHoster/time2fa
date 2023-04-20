@@ -154,7 +154,7 @@ console.log(secret);
 // Import generateSecret
 import { generateUrl } from 'time2fa';
 
-const url = generateUrl();
+const url = generateUrl({issuer: "N0C", user: "johndoe@n0c.com", secret: "ABCDEFGHIJKLMN12"});
 
 console.log(url);
 
