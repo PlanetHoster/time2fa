@@ -18,6 +18,12 @@ export interface TotpOptions {
   user: string;
 }
 
+export interface UrlOptions {
+  issuer: string;
+  user: string;
+  secret: string;
+}
+
 export interface TotpCode {
   secret: string;
   drift?: number;

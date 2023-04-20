@@ -180,6 +180,8 @@ generateSecret(secretSize: number = DEFAULT_TOTP_SECRET_SIZE): `string`
 
 generateBackupCodes(numCodes = 10, codeLength = DEFAULT_TOTP_DIGITS): `string[]`
 
+generateUrl(options: [UrlOptions](#UrlOptions), config: [ValidTotpConfig](#ValidTotpConfig)): `string`
+
 #### Totp
 
 Totp.generateKey(options: [TotpOptions](#TotpOptions), config?: [TotpConfig](#TotpConfig)): `GenerateKey`
@@ -220,6 +222,14 @@ Hotp.validate(options: [HotpValidateOptions](#HotpValidateOptions), config?: [To
 | :-------- | :------- | :------------------------- |--------|
 | `issuer` | `string` |-|**Required** - Issuer name|
 | `user` | `string` |-|**Required** - Username|
+
+#### `UrlOptions`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `issuer` | `string` |-|**Required** - Issuer name|
+| `user` | `string` |-|**Required** - Username|
+| `secret` | `string` |-|**Required** - Secret|
 
 #### `TotpCode`
 

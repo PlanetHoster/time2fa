@@ -1,6 +1,6 @@
 {
   "name": "time2fa",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "NodeJS OTP implementation",
   "repository": {
     "type": "git",
@@ -13,8 +13,7 @@
     "test": "npm run build && jest",
     "clean": "rimraf ./.build",
     "lint": "eslint src",
-    "format": "npx prettier --write src",
-    "build-package": "npm run build && cp ./package.json ./.build/ && cp ./README.md ./.build/README.md"
+    "format": "npx prettier --write src"
   },
   "author": "Marc-Andre Godin",
   "license": "MIT",
