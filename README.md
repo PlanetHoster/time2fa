@@ -149,6 +149,18 @@ console.log(secret);
 // ABCDEFGHIJKLMN12
 ```
 
+#### generateUrl()
+```javascript
+// Import generateSecret
+import { generateUrl } from 'time2fa';
+
+const url = generateUrl({issuer: "N0C", user: "johndoe@n0c.com", secret: "ABCDEFGHIJKLMN12"});
+
+console.log(url);
+
+// otpauth://totp/N0C:johndoe%40n0c.com?issuer=N0C&period=30&secret=ABCDEFGHIJKLMN12
+```
+
 #### generateBackupCodes()
 Backup code should only be used once
 ```javascript
@@ -179,6 +191,8 @@ generateConfig(config?: [TotpConfig](#TotpConfig)): `ValidTotpConfig`
 generateSecret(secretSize: number = DEFAULT_TOTP_SECRET_SIZE): `string`
 
 generateBackupCodes(numCodes = 10, codeLength = DEFAULT_TOTP_DIGITS): `string[]`
+
+generateUrl(options: [UrlOptions](#UrlOptions), config: [ValidTotpConfig](#ValidTotpConfig)): `string`
 
 #### Totp
 
@@ -220,6 +234,14 @@ Hotp.validate(options: [HotpValidateOptions](#HotpValidateOptions), config?: [To
 | :-------- | :------- | :------------------------- |--------|
 | `issuer` | `string` |-|**Required** - Issuer name|
 | `user` | `string` |-|**Required** - Username|
+
+#### `UrlOptions`
+
+| Parameter | Type     | default                |Description|
+| :-------- | :------- | :------------------------- |--------|
+| `issuer` | `string` |-|**Required** - Issuer name|
+| `user` | `string` |-|**Required** - Username|
+| `secret` | `string` |-|**Required** - Secret|
 
 #### `TotpCode`
 

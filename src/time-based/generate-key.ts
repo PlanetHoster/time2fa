@@ -3,8 +3,7 @@ import {
   TotpOptions,
   ValidTotpConfig,
 } from "../interfaces/otp.interface";
-import { generateConfig, generateSecret } from "../main";
-import { DEFAULT_TOTP_ALGO, DEFAULT_TOTP_DIGITS } from "../utils/constants";
+import { generateConfig, generateSecret, generateUrl } from "../main";
 
 // https://github.com/google/google-authenticator/wiki/Key-Uri-Format
 
@@ -29,37 +28,14 @@ export class GenerateKey {
     this.config = generateConfig(config);
 
     this.secret = generateSecret(this.config.secretSize);
-    this.url = this.generateUrl();
-  }
 
-  private generateUrl(): string {
-    if (this.config && this.secret) {
-      const url = new URL(`otpauth://totp`);
-      url.pathname = `/${encodeURIComponent(this.issuer)}:${encodeURIComponent(
-        this.user
-      )}`;
-
-      const params = new URLSearchParams({
+    this.url = generateUrl(
+      {
         issuer: this.issuer,
-        period: this.config.period.toString(), // Currently ignored by the google auth implementations
+        user: this.user,
         secret: this.secret,
-      });
-
-      // Currently ignored by the google auth implementations
-      if (this.config.algo !== DEFAULT_TOTP_ALGO) {
-        params.set("algorithm", this.config.algo);
-      }
-
-      // Currently ignored by the google auth implementations
-      if (this.config.digits !== DEFAULT_TOTP_DIGITS) {
-        params.set("digits", this.config.digits.toString());
-      }
-
-      url.search = params.toString();
-
-      return url.toString();
-    } else {
-      throw new Error("Invalid configuration");
-    }
+      },
+      this.config
+    );
   }
 }
