@@ -8,7 +8,7 @@ import {
     TotpConfig,
     UrlOptions,
     ValidTotpConfig,
-} from "./interfaces/otp.interface";
+} from "./interfaces";
 import { TimeBased } from "./time-based/time-based";
 import { Encode32 } from "./utils/encode";
 import crypto from "crypto";
@@ -79,3 +79,4 @@ export const generateUrl = (
 
 export const Totp = new TimeBased();
 export const Hotp = new HmacBased();
+export * from './interfaces';

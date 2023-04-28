@@ -3,7 +3,7 @@ import {
   HotpValidateOptions,
   TotpConfig,
   ValidTotpConfig,
-} from "../interfaces/otp.interface";
+} from "../interfaces";
 import { generateConfig } from "../index";
 import { Decode32 } from "../utils/encode";
 import crypto from "crypto";

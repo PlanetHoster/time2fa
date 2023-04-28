@@ -5,7 +5,7 @@ import {
   TotpOptions,
   ValidTotpConfig,
   TotpValidateOptions,
-} from "../interfaces/otp.interface";
+} from "../interfaces";
 import { generateConfig } from "../index";
 import { DEFAULT_TOTP_PERIOD } from "../utils/constants";
 import { ValidationError } from "../utils/validation-error";
