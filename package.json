@@ -47,8 +47,8 @@
   "devDependencies": {
     "@antfu/ni": "^0.21.2",
     "@types/node": "^18.15.11",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "@vitest/coverage-c8": "^0.31.0",
     "bumpp": "^9.1.0",
     "eslint": "^8.38.0",
