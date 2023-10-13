@@ -114,6 +114,69 @@ describe("TOTP passcodes default config", () => {
   });
 });
 
+
+describe("TOTP passcodes custom config", () => {
+  const key = Totp.generateKey({ issuer, user }, { period : 60, digits: 8 , secretSize: 20});
+  const driftValue = 1; // Should return 3 codes
+
+  const otherSecret = generateSecret(20);
+
+  const codes = Totp.generatePasscodes(
+    { secret: key.secret, drift: driftValue },
+    key.config
+  );
+
+  test("drift with value 1 respected", () => {
+    expect(codes.length).toBe(3);
+  });
+
+  test("codes digits", () => {
+    codes.forEach((c) => {
+      expect(c.length).toBe(key.config.digits);
+    });
+  });
+
+  test("validation with key secret", () => {
+    const idx = Math.floor(Math.random() * codes.length); // Getting a random index
+    expect(
+      Totp.validate({
+        passcode: codes[idx],
+        secret: key.secret,
+        drift: driftValue,
+      }, key.config)
+    ).toBe(true);
+  });
+
+  test("failed validation with other secret", () => {
+    const idx = Math.floor(Math.random() * codes.length); // Getting a random index
+    expect(
+      Totp.validate({
+        passcode: codes[idx],
+        secret: otherSecret,
+        drift: driftValue,
+      }, key.config)
+    ).toBe(false);
+  });
+
+  test("invalid secret length", () => {
+    const secret = generateSecret(32);
+    expect(() => Totp.validate({ passcode: codes[1], secret }, key.config)).toThrow(
+      "Invalid secret"
+    );
+  });
+
+  test("valid secret length but wrong secret", () => {
+    const secret = generateSecret(20);
+    expect(Totp.validate({ passcode: codes[1], secret }, key.config)).toBe(false);
+  });
+
+  test("invalid passcode length", () => {
+    expect(() =>
+      Totp.validate({ passcode: "123", secret: key.secret }, key.config)
+    ).toThrow("Invalid passcode");
+  });
+});
+
 describe("TOTP passcodes hashing algorithms", () => {
   const sha256Config = generateConfig({ algo: "sha256" });
 
