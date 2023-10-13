@@ -21,7 +21,7 @@ export class TimeBased {
     config: ValidTotpConfig
   ): string[] {
     const epoch = Math.floor(Date.now() / 1000);
-    const counter = Math.floor(epoch / DEFAULT_TOTP_PERIOD);
+    const counter = Math.floor(epoch / (config.period || DEFAULT_TOTP_PERIOD));
 
     const counters = [counter];
     if (options.drift && options.drift > 0) {
