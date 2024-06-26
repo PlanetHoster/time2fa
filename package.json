@@ -51,7 +51,7 @@
     "@typescript-eslint/parser": "^7.0.0",
     "@vitest/coverage-v8": "^1.0.0",
     "bumpp": "^9.1.0",
-    "eslint": "^8.38.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.0.0",
     "esno": "^4.0.0",
     "lint-staged": "^15.0.0",
