@@ -51,10 +51,9 @@ export const generateUrl = (
     options: UrlOptions,
     config: ValidTotpConfig
 ): string => {
-    const url = new URL(`otpauth://totp`);
-    url.pathname = `/${encodeURIComponent(options.issuer)}:${encodeURIComponent(
+    const url = new URL(`otpauth://totp/${encodeURIComponent(options.issuer)}:${encodeURIComponent(
         options.user
-    )}`;
+    )}`);
 
     const params = new URLSearchParams({
         issuer: options.issuer,
