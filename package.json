@@ -54,7 +54,7 @@
     "@types/node": "^22.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
-    "@vitest/coverage-v8": "^2.0.0",
+    "@vitest/coverage-v8": "^3.0.0",
     "bumpp": "^9.1.0",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^10.0.0",
@@ -66,7 +66,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.3",
     "unbuild": "^2.0.0",
-    "vitest": "^2.0.0"
+    "vitest": "^3.0.0"
   },
   "simple-git-hooks": {
     "pre-commit": "npm run lint-staged"
