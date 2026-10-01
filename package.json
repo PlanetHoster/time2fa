@@ -65,7 +65,7 @@
     "simple-git-hooks": "^2.8.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.3",
-    "unbuild": "^2.0.0",
+    "unbuild": "^3.0.0",
     "vitest": "^3.0.0"
   },
   "simple-git-hooks": {
